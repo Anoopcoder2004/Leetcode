@@ -1,6 +1,6 @@
 // 1. Store all numbers in a Set for O(1) lookups
 // 2. Initialize a variable to keep track of the longest sequence length
-// 3. Loop through each number in the Set
+// 3. Loop through each number in the Set(here set is used instead of array to avoid counting of duplicates)
 // 4. Check if the current number is the start of a sequence
 //    (i.e., the previous number does not exist in the Set)
 // 5. If it is a start, initialize current number and count
