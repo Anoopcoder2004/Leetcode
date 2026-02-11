@@ -1,34 +1,40 @@
-// 1. Problem: Find the minimum eating speed `k` so that Koko can eat all banana piles within `h` hours.
+/**
+ * Approach:
+ * 1. Define the search range:
+ *    - Minimum possible speed = 1
+ *    - Maximum possible speed = largest pile
+ * 2. Create a helper function `hoursNeeded(speed)`:
+ *    - For each pile, calculate hours = ceil(pile / speed)
+ *    - Sum these hours to get total time at this speed
+ * 3. Use binary search to find the minimum speed:
+ *    - While low < high:
+ *        a. mid = floor((low + high) / 2)
+ *        b. If hoursNeeded(mid) <= h, then mid speed is enough, try slower speeds (high = mid)
+ *        c. Else, mid speed is too slow, try faster speeds (low = mid + 1)
+ * 4. When loop ends, low == high, which is the minimum speed to finish on time
+ */
 
-// 2. Idea: Check each possible speed starting from 1, calculate total hours needed at that speed, and find the smallest speed that works.
+var minEatingSpeed = function(piles, h) {
+    let low = 1;
+    let high = Math.max(...piles);
 
-// 3. Steps:
-//    a. Initialize speed = 1.
-//    b. Loop indefinitely:
-//        i.   Calculate totalTime needed to eat all piles at the current speed.
-//        ii.  For each pile, hours to eat = ceil(pile / speed).
-//        iii. Sum all hours for all piles → totalTime.
-//        iv.  If totalTime <= h, current speed is enough → return speed.
-//        v.   Else, increase speed by 1 and try again.
-       
-// 4. Note:
-//    - Using Math.ceil ensures we account for partially eaten piles as a full hour.
-//    - This is the brute force approach.
-//    - For large inputs, binary search on speed is much faster.
+    const hoursNeeded = (speed) => {
+        let total = 0;
+        for (let pile of piles) {
+            total += Math.ceil(pile / speed);
+        }
+        return total;
+    }
 
+    while (low < high) {
+        let mid = Math.floor((low + high) / 2);
 
-class Solution {
-    minEatingSpeed(piles, h) {
-        let speed = 1;
-        while(true){
-            let totalTime = 0;
-            for(let pile of piles){
-                totalTime += Math.ceil(pile / speed);
-            }
-            if(totalTime <= h){
-                return speed;
-            }
-            speed++;
+        if (hoursNeeded(mid) <= h) {
+            high = mid;
+        } else {
+            low = mid + 1;
         }
     }
-}
+
+    return low;
+};
