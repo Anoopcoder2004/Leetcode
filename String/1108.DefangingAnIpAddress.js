@@ -18,3 +18,9 @@ var defangIPaddr = function(address) {
     }return op;
     
 };
+
+// Time complexity
+//  O(n)
+
+//  Space complexity
+//  O(n)

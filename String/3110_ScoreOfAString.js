@@ -18,3 +18,9 @@ var scoreOfString = function(s) {
     return score;
     
 };
+ 
+// Time complexity
+// O(n)
+
+// Space complexity 
+// O(1)

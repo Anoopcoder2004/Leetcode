@@ -21,3 +21,8 @@ var findWordsContaining = function(words, x) {
     return op;
     
 };
+
+// Time complexity
+// O(n*m) where m = avg length of words
+// Space complexity
+// O(n)
